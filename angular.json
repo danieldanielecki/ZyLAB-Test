@@ -1,0 +1,140 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "zylab-workspace": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/zylab-workspace",
+      "sourceRoot": "apps/zylab-workspace/src",
+      "prefix": "zylab-workspace",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/zylab-workspace",
+            "index": "apps/zylab-workspace/src/index.html",
+            "main": "apps/zylab-workspace/src/main.ts",
+            "polyfills": "apps/zylab-workspace/src/polyfills.ts",
+            "tsConfig": "apps/zylab-workspace/tsconfig.app.json",
+            "assets": [
+              "apps/zylab-workspace/src/favicon.ico",
+              "apps/zylab-workspace/src/assets"
+            ],
+            "styles": ["apps/zylab-workspace/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/zylab-workspace/src/environments/environment.ts",
+                  "with": "apps/zylab-workspace/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "zylab-workspace:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "zylab-workspace:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "zylab-workspace:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/zylab-workspace/tsconfig.app.json",
+              "apps/zylab-workspace/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/zylab-workspace/jest.config.js",
+            "tsConfig": "apps/zylab-workspace/tsconfig.spec.json",
+            "setupFile": "apps/zylab-workspace/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "zylab-workspace-e2e": {
+      "root": "apps/zylab-workspace-e2e",
+      "sourceRoot": "apps/zylab-workspace-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/zylab-workspace-e2e/cypress.json",
+            "tsConfig": "apps/zylab-workspace-e2e/tsconfig.e2e.json",
+            "devServerTarget": "zylab-workspace:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "zylab-workspace:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/zylab-workspace-e2e/tsconfig.e2e.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "zylab-workspace"
+}
