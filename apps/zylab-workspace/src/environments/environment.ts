@@ -2,8 +2,19 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+declare const API_KEY_FIREBASE_DEVELOPMENT: string;
+
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+    apiKey: API_KEY_FIREBASE_DEVELOPMENT,
+    authDomain: 'zylab-dev.firebaseapp.com',
+    databaseURL: 'https://zylab-dev.firebaseio.com',
+    projectId: 'zylab-dev',
+    storageBucket: '',
+    messagingSenderId: '852915493231',
+    appId: '1:852915493231:web:0ae73413f0e22c1e'
+  }
 };
 
 /*

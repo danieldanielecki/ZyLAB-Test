@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'zylab-workspace-root',
+  selector: 'zylab-workspace',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

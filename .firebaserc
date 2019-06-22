@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "zylab-dev",
+    "development": "zylab-dev",
+    "production": "zylab-prod"
+  }
+}
