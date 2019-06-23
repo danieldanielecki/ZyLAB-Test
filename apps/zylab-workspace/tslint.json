@@ -1,7 +1,7 @@
 {
   "extends": "../../tslint.json",
   "rules": {
-    "directive-selector": [true, "attribute", "zylab-workspace", "camelCase"],
-    "component-selector": [true, "element", "zylab-workspace", "kebab-case"]
+    "directive-selector": [true, "attribute", "app-root", "camelCase"],
+    "component-selector": [true, "element", "app-root", "kebab-case"]
   }
 }

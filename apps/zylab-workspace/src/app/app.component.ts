@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
+import { fadeAnimation } from 'constants/fade.animation';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'zylab-workspace',
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [fadeAnimation]
 })
 export class AppComponent {
   title = 'zylab-workspace';
+  public getRouterOutletState(routerOutlet: RouterOutlet): RouterOutlet {
+    const routeData = routerOutlet.activatedRouteData['animation'];
+    return routeData ? routeData : 'rootPage';
+  }
 }

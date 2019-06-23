@@ -13,6 +13,24 @@
     },
     "zylab-workspace": {
       "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "shared": {
+      "tags": []
+    },
+    "not-found": {
+      "tags": []
+    },
+    "home": {
+      "tags": []
+    },
+    "books": {
+      "tags": []
+    },
+    "authors": {
+      "tags": []
     }
   }
 }
