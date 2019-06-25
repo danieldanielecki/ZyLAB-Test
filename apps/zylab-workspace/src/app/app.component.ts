@@ -9,7 +9,6 @@ import { RouterOutlet } from '@angular/router';
   animations: [fadeAnimation]
 })
 export class AppComponent {
-  title = 'zylab-workspace';
   public getRouterOutletState(routerOutlet: RouterOutlet): RouterOutlet {
     const routeData = routerOutlet.activatedRouteData['animation'];
     return routeData ? routeData : 'rootPage';

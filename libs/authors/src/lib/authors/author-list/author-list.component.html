@@ -1,0 +1,7 @@
+<button class="btn btn-success" (click)="onNewAuthor()">New Author</button>
+<hr />
+<app-authors-item
+  *ngFor="let authorElement of (authorState | async).authors; let i = index"
+  [author]="authorElement"
+  [index]="i"
+></app-authors-item>

@@ -1,5 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthorsComponent } from './authors.component';
+import { AuthorsModule } from './../authors.module';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
 
 describe('AuthorsComponent', () => {
   let component: AuthorsComponent;
@@ -7,7 +12,13 @@ describe('AuthorsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthorsComponent]
+      imports: [
+        AuthorsModule,
+        EffectsModule.forRoot([]),
+        HttpClientModule,
+        RouterTestingModule,
+        StoreModule.forRoot([])
+      ]
     }).compileComponents();
   }));
 

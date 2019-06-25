@@ -1,0 +1,8 @@
+<button class="btn btn-success" (click)="onNewBook()">New Book</button>
+<hr />
+<app-books-item
+  *ngFor="let bookElement of (bookState | async).books; let i = index"
+  [book]="bookElement"
+  [index]="i"
+>
+</app-books-item>
