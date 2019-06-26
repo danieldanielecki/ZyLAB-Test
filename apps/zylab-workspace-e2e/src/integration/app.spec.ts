@@ -11,15 +11,15 @@ describe('Page: Home', () => {
 describe('Page: Authors', () => {
   beforeEach(() => cy.visit('/authors'));
 
-  it('should display authors message', () => {
-    getParagraph().contains('authors works!');
+  it('should display authors paragraph', () => {
+    getParagraph().contains('Authors');
   });
 });
 
 describe('Page: Books', () => {
   beforeEach(() => cy.visit('/books'));
 
-  it('should display books message', () => {
-    getParagraph().contains('books works!');
+  it('should display books paragraph', () => {
+    getParagraph().contains('Books:');
   });
 });
