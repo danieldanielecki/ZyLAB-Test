@@ -1,0 +1,13 @@
+<a
+  style="cursor: pointer;"
+  [routerLink]="[index]"
+  routerLinkActive="active"
+  class="list-group-item clearfix"
+>
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ book.year }}</h4>
+    <p class="list-group-item-text">{{ book.title }}</p>
+    <p class="list-group-item-text">{{ book.authorId }}</p>
+    <p class="list-group-item-text">{{ book.publisher }}</p>
+  </div>
+</a>
