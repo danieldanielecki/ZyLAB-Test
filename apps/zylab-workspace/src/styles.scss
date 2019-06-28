@@ -2,3 +2,12 @@
 .mat-drawer-backdrop {
   position: fixed !important;
 }
+
+@media (max-width: 960px) {
+  mat-cell {
+    &:first-of-type,
+    &:last-of-type {
+      padding: 0px !important;
+    }
+  }
+}

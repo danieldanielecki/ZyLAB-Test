@@ -1,0 +1,36 @@
+section {
+  padding: 2em;
+  margin: 2em auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  mat-cell {
+    font-weight: 500;
+  }
+
+  mat-header-cell {
+    font-weight: 900;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+@media (max-width: 960px) {
+  mat-cell {
+    &:first-child {
+      margin-top: 2em;
+    }
+
+    span {
+      font-size: 1em;
+    }
+  }
+
+  mat-row {
+    border-bottom: 5px solid rgba(0, 0, 0, 0.12);
+  }
+}

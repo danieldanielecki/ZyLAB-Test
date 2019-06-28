@@ -1,4 +1,4 @@
-import { getParagraph } from '../support/app.po';
+import { getHeader, getParagraph } from '../support/app.po';
 
 describe('Page: Home', () => {
   beforeEach(() => cy.visit('/'));
@@ -11,15 +11,15 @@ describe('Page: Home', () => {
 describe('Page: Authors', () => {
   beforeEach(() => cy.visit('/authors'));
 
-  it('should display authors paragraph', () => {
-    getParagraph().contains('Authors');
+  it('should display authors title', () => {
+    getHeader().contains('Authors');
   });
 });
 
 describe('Page: Books', () => {
   beforeEach(() => cy.visit('/books'));
 
-  it('should display books paragraph', () => {
-    getParagraph().contains('Books:');
+  it('should display books title', () => {
+    getHeader().contains('Books');
   });
 });

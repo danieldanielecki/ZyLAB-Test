@@ -6,8 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import {
   MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
   MatListModule,
+  MatPaginatorModule,
   MatSidenavModule,
+  MatSortModule,
+  MatTableModule,
   MatToolbarModule
 } from '@angular/material';
 import { MomentModule } from 'ngx-moment';
@@ -22,8 +27,13 @@ import { RouterModule } from '@angular/router';
     FontAwesomeModule,
     FormsModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatListModule,
+    MatPaginatorModule,
     MatSidenavModule,
+    MatSortModule,
+    MatTableModule,
     MatToolbarModule,
     MomentModule,
     ReactiveFormsModule,
@@ -37,8 +47,13 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     HeaderComponent,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatListModule,
+    MatPaginatorModule,
     MatSidenavModule,
+    MatSortModule,
+    MatTableModule,
     MatToolbarModule,
     MomentModule,
     ReactiveFormsModule,

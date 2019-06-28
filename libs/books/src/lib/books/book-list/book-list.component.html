@@ -1,8 +1,103 @@
-<button class="btn btn-success" (click)="onNewBook()">New Book</button>
+<!-- <button class="btn btn-success" (click)="onNewBook()">New Book</button>
 <hr />
 <app-books-item
   *ngFor="let bookElement of (bookState | async).books; let i = index"
   [book]="bookElement"
   [index]="i"
 >
-</app-books-item>
+</app-books-item> -->
+
+<section
+  fxFlex="70"
+  fxFlex.md="80"
+  fxFlex.lt-md="90"
+  fxFlexOffset="15"
+  fxFlexOffset.md="10"
+  fxFlexOffset.lt-md="5"
+  class="mat-elevation-z8"
+>
+  <h1>Books</h1>
+
+  <!-- Filtering input. -->
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      placeholder="Search"
+      (keyup)="applyFilter($event.target.value)"
+    />
+  </mat-form-field>
+
+  <!-- Books table with sorting. -->
+  <mat-table matSort [dataSource]="dataSource">
+    <!-- Book name column. -->
+    <ng-container matColumnDef="year">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Year
+      </mat-header-cell>
+      <mat-cell *matCellDef="let book" fxLayoutAlign.lt-md="center center">
+        <span fxHide.gt-sm><strong>Year:</strong></span
+        >&nbsp;<span attr.aria-label="The book year is {{ book.year }}.">{{
+          book.year
+        }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Book title column. -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Title
+      </mat-header-cell>
+      <mat-cell *matCellDef="let book" fxLayoutAlign.lt-md="center center">
+        <span fxHide.gt-sm><strong>Title:</strong></span
+        >&nbsp;<span
+          attr.aria-label="The book destination is {{ book.title }}."
+          >{{ book.title }}</span
+        >
+      </mat-cell>
+    </ng-container>
+
+    <!-- Book authorId column. -->
+    <ng-container matColumnDef="authorId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Author ID
+      </mat-header-cell>
+      <mat-cell *matCellDef="let book" fxLayoutAlign.lt-md="center center">
+        <span fxHide.gt-sm><strong>Author ID:</strong></span
+        >&nbsp;<span
+          attr.aria-label="The book authorId is {{ book.authorId }}."
+          >{{ book.authorId }}</span
+        >
+      </mat-cell>
+    </ng-container>
+
+    <!-- Book publisher column. -->
+    <ng-container matColumnDef="publisher">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Publisher
+      </mat-header-cell>
+      <mat-cell *matCellDef="let book" fxLayoutAlign.lt-md="center center">
+        <span fxHide.gt-sm><strong>Publisher:</strong></span
+        >&nbsp;<span
+          attr.aria-label="The book publisher is {{ book.publisher }}."
+          >{{ book.publisher }}</span
+        >
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header of books. -->
+    <mat-header-row
+      *matHeaderRowDef="displayedColumns; sticky: true"
+      fxHide.lt-md
+    ></mat-header-row>
+
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="start"
+    ></mat-row>
+  </mat-table>
+
+  <!-- Pagination. -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</section>

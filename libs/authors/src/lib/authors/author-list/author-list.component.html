@@ -1,7 +1,71 @@
-<button class="btn btn-success" (click)="onNewAuthor()">New Author</button>
+<!-- <button class="btn btn-success" (click)="onNewAuthor()">New Author</button>
 <hr />
-<app-authors-item
-  *ngFor="let authorElement of (authorState | async).authors; let i = index"
-  [author]="authorElement"
-  [index]="i"
-></app-authors-item>
+<app-authors-item *ngFor="let authorElement of (authorState | async).authors; let i = index" [author]="authorElement"
+  [index]="i"></app-authors-item> -->
+
+<section
+  fxFlex="70"
+  fxFlex.md="80"
+  fxFlex.lt-md="90"
+  fxFlexOffset="15"
+  fxFlexOffset.md="10"
+  fxFlexOffset.lt-md="5"
+  class="mat-elevation-z8"
+>
+  <h1>Authors</h1>
+
+  <!-- Filtering input. -->
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      placeholder="Search"
+      (keyup)="applyFilter($event.target.value)"
+    />
+  </mat-form-field>
+
+  <!-- Authors table with sorting. -->
+  <mat-table matSort [dataSource]="dataSource">
+    <!-- Author name column. -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let author" fxLayoutAlign.lt-md="center center">
+        <span fxHide.gt-sm><strong>Name:</strong></span
+        >&nbsp;<span attr.aria-label="The author name is {{ author.name }}.">{{
+          author.name
+        }}</span>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Author year of birth column. -->
+    <ng-container matColumnDef="yearOfBirth">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Year of birth
+      </mat-header-cell>
+      <mat-cell *matCellDef="let author" fxLayoutAlign.lt-md="center center">
+        <span fxHide.gt-sm><strong>Year of Birth:</strong></span
+        >&nbsp;<span
+          attr.aria-label="The author destination is {{ author.yearOfBirth }}."
+          >{{ author.yearOfBirth }}</span
+        >
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header of authors. -->
+    <mat-header-row
+      *matHeaderRowDef="displayedColumns; sticky: true"
+      fxHide.lt-md
+    ></mat-header-row>
+
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      fxLayout.lt-md="column"
+      fxLayoutAlign="start"
+    ></mat-row>
+  </mat-table>
+
+  <!-- Pagination. -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</section>
