@@ -7,6 +7,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Observable, throwError } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
+import * as AuthorActions from '../store/author.actions';
 import * as fromAuthor from '../store/author.reducers';
 
 @Component({
@@ -19,7 +20,7 @@ export class AuthorListComponent implements AfterViewInit, OnInit {
   public dataSource: MatTableDataSource<Author> = new MatTableDataSource<
     Author
   >();
-  public displayedColumns: string[] = ['name', 'yearOfBirth'];
+  public displayedColumns: string[] = ['name'];
   private searchSubject$: Subject<string> = new Subject<string>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,16 +42,12 @@ export class AuthorListComponent implements AfterViewInit, OnInit {
       .pipe(
         map((response: any) => {
           return response.authors.map((item: any) => {
-            return new Author(
-              item.id.toString(),
-              item.name.toString(),
-              item.yearOfBirth.toString()
-            );
+            return new Author(item.name, item.yearOfBirth);
           });
         }),
         // Handle errors. There's not actually call to API, thus it's just as a practice. Different types of errors (mapping/throwing) in such scenario could be added as well as finalize/tap.
         catchError((error: any) => {
-          console.log('Caught mapping error: ', error);
+          console.log('Caught mapping error: ', error); // TODO: Comment for production.
           return throwError(error); // Throw an error.
         })
       )
@@ -74,8 +71,16 @@ export class AuthorListComponent implements AfterViewInit, OnInit {
       });
   }
 
-  onNewAuthor() {
+  public onNewAuthor(): void {
     this.router.navigate(['new'], { relativeTo: this.route });
+  }
+
+  public onSaveAuthors(): void {
+    this.store.dispatch(new AuthorActions.StoreAuthors());
+  }
+
+  public onFetchAuthors(): void {
+    this.store.dispatch(new AuthorActions.FetchAuthors());
   }
 
   // Based on user input apply her/his desired filter value in order to show results of the filtering.

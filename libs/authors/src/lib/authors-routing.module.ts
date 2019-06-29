@@ -9,7 +9,6 @@ const authorsRoutes: Routes = [
     path: '',
     component: AuthorsComponent,
     children: [
-      { path: '', component: AuthorsComponent },
       { path: 'new', component: AuthorEditComponent },
       { path: ':id', component: AuthorDetailComponent },
       { path: ':id/edit', component: AuthorEditComponent }

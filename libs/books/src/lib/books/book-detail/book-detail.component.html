@@ -1,8 +1,33 @@
-<div>
-  <ul>
-    <li>Book year: {{ (bookState | async).books[id].year }}</li>
-    <li>Book title: {{ (bookState | async).books[id].title }}</li>
-    <li>Book authorId: {{ (bookState | async).books[id].authorId }}</li>
-    <li>Book publisher: {{ (bookState | async).books[id].publisher }}</li>
-  </ul>
-</div>
+<mat-card class="mat-elevation-z24">
+  <h2>Book details</h2>
+
+  <!-- Books details. -->
+  <mat-list fxLayout="column">
+    <mat-list-item fxLayoutAlign="center center">
+      Title: {{ (bookState | async).books[id].title }}
+    </mat-list-item>
+    <mat-list-item fxLayoutAlign="center center">
+      Year: {{ (bookState | async).books[id].year }}
+    </mat-list-item>
+    <mat-list-item fxLayoutAlign="center center">
+      Author: {{ (bookState | async).books[id].authorId }}
+    </mat-list-item>
+    <mat-list-item fxLayoutAlign="center center">
+      Publisher: {{ (bookState | async).books[id].publisher }}
+    </mat-list-item>
+  </mat-list>
+
+  <!-- Buttons to manipulate authors data. -->
+  <div
+    fxLayoutAlign="space-around center"
+    fxLayout.lt-md="column"
+    fxLayoutGap.lt-md="15px"
+  >
+    <button mat-raised-button color="primary" (click)="onEditBook()">
+      Edit
+    </button>
+    <button mat-raised-button color="warn" (click)="onDeleteBook()">
+      Delete
+    </button>
+  </div>
+</mat-card>

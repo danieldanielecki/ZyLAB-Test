@@ -1,10 +1,10 @@
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Book } from '../../book.model';
+import { HttpClient, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as BookActions from './book.actions';
-import { HttpClient, HttpRequest } from '@angular/common/http';
-import { Book } from '../../book.model';
-import { Injectable } from '@angular/core';
 import * as fromBook from './book.reducers';
 
 @Injectable()
@@ -13,9 +13,8 @@ export class BookEffects {
   bookFetch = this.actions$.pipe(
     ofType(BookActions.FETCH_BOOKS),
     switchMap((action: BookActions.FetchBooks) => {
-      // TODO: Change this URL.
       return this.httpClient.get<Book[]>(
-        'https://ng-recipe-book-1a5ac.firebaseio.com/recipes.json',
+        'https://zylab-dev.firebaseio.com/books.json',
         {
           observe: 'body',
           responseType: 'json'
@@ -23,7 +22,7 @@ export class BookEffects {
       );
     }),
     map(books => {
-      console.log(books);
+      console.log(books); // TODO: Comment for production.
       return {
         type: BookActions.SET_BOOKS,
         payload: books
@@ -36,10 +35,9 @@ export class BookEffects {
     ofType(BookActions.STORE_BOOKS),
     withLatestFrom(this.store.select('books')),
     switchMap(([action, state]) => {
-      // TODO: Change this URL.
       const req = new HttpRequest(
         'PUT',
-        'https://ng-recipe-book-1a5ac.firebaseio.com/recipes.json',
+        'https://zylab-dev.firebaseio.com/books.json',
         state.books,
         { reportProgress: true }
       );

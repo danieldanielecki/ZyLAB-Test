@@ -2,7 +2,6 @@ import { authorReducer } from './authors/store/author.reducers';
 import { AuthorDetailComponent } from './authors/author-detail/author-detail.component';
 import { AuthorEditComponent } from './authors/author-edit/author-edit.component';
 import { AuthorEffects } from './authors/store/author.effects';
-import { AuthorItemComponent } from './authors/author-list/author-item/author-item.component';
 import { AuthorListComponent } from './authors/author-list/author-list.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AuthorsRoutingModule } from './authors-routing.module';
@@ -16,7 +15,6 @@ import { StoreModule } from '@ngrx/store';
   declarations: [
     AuthorDetailComponent,
     AuthorEditComponent,
-    AuthorItemComponent,
     AuthorListComponent,
     AuthorsComponent
   ],

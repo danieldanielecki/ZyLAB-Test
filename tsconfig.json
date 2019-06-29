@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@libs/*": ["libs/*"]
+      "@libs/*": ["libs/*"],
+      "@zylab-workspace/*": ["apps/zylab-workspace/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -9,17 +9,19 @@ export interface State {
   authors: Author[];
 }
 
+// Initial authors data.
 const initialState: State = {
   authors: [
-    new Author(1, 'James Baldwin', 1969),
-    new Author(2, 'Katherine Dunn', 1942),
-    new Author(3, 'Vladimir Nabokov', 1913),
-    new Author(4, 'David Foster Wallace', 1955),
-    new Author(5, 'Italo Calvino', 1986),
-    new Author(6, 'Edward Abbey', 1975)
+    new Author('James Baldwin', 1969),
+    new Author('Katherine Dunn', 1942),
+    new Author('Vladimir Nabokov', 1913),
+    new Author('David Foster Wallace', 1955),
+    new Author('Italo Calvino', 1986),
+    new Author('Edward Abbey', 1975)
   ]
 };
 
+// Core logic for authors manipulation.
 export function authorReducer(
   state = initialState,
   action: AuthorActions.AuthorActions

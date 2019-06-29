@@ -6,8 +6,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    data: { animation: 'home' },
-    pathMatch: 'full'
+    data: { animation: 'home' }
   },
   {
     data: { animation: 'authors' },
@@ -27,8 +26,7 @@ const routes: Routes = [
   // Routes parses from top to bottom, thus put '**' is at the end.
   {
     path: '**', // Wildcard path, which means to catch all other routes, not specified above.
-    redirectTo: 'not-found', // Alternative to component in routes, which redirects to specific path.
-    pathMatch: 'full'
+    redirectTo: 'not-found' // Alternative to component in routes, which redirects to specific path.
   }
 ];
 

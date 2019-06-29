@@ -1,8 +1,3 @@
-<!-- <button class="btn btn-success" (click)="onNewAuthor()">New Author</button>
-<hr />
-<app-authors-item *ngFor="let authorElement of (authorState | async).authors; let i = index" [author]="authorElement"
-  [index]="i"></app-authors-item> -->
-
 <section
   fxFlex="70"
   fxFlex.md="80"
@@ -13,6 +8,27 @@
   class="mat-elevation-z8"
 >
   <h1>Authors</h1>
+
+  <!-- Buttons to manipulate authors data. -->
+  <div
+    class="buttons"
+    fxLayoutAlign="space-evenly center"
+    fxLayout.lt-md="column"
+    fxLayoutGap.lt-md="15px"
+  >
+    <button mat-raised-button color="primary" (click)="onNewAuthor()">
+      New Author
+    </button>
+    <button mat-raised-button color="primary" (click)="onSaveAuthors()">
+      Save Authors
+    </button>
+    <button mat-raised-button color="primary" (click)="onFetchAuthors()">
+      Fetch Authors
+    </button>
+  </div>
+
+  <!-- Here will be displayed authors details. -->
+  <router-outlet></router-outlet>
 
   <!-- Filtering input. -->
   <mat-form-field>
@@ -31,25 +47,18 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header>
         Name
       </mat-header-cell>
-      <mat-cell *matCellDef="let author" fxLayoutAlign.lt-md="center center">
-        <span fxHide.gt-sm><strong>Name:</strong></span
-        >&nbsp;<span attr.aria-label="The author name is {{ author.name }}.">{{
-          author.name
-        }}</span>
-      </mat-cell>
-    </ng-container>
-
-    <!-- Author year of birth column. -->
-    <ng-container matColumnDef="yearOfBirth">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>
-        Year of birth
-      </mat-header-cell>
-      <mat-cell *matCellDef="let author" fxLayoutAlign.lt-md="center center">
-        <span fxHide.gt-sm><strong>Year of Birth:</strong></span
-        >&nbsp;<span
-          attr.aria-label="The author destination is {{ author.yearOfBirth }}."
-          >{{ author.yearOfBirth }}</span
+      <mat-cell
+        *matCellDef="let author; let i = index"
+        fxLayoutAlign.lt-md="center center"
+      >
+        <button
+          mat-button
+          [routerLink]="[i + paginator.pageIndex * paginator.pageSize]"
+          routerLinkActive="active"
+          attr.aria-label="The author name is {{ author.name }}."
         >
+          {{ author.name }}
+        </button>
       </mat-cell>
     </ng-container>
 
@@ -67,5 +76,9 @@
   </mat-table>
 
   <!-- Pagination. -->
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator
+    #paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+  ></mat-paginator>
 </section>

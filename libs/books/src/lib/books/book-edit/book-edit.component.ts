@@ -24,8 +24,9 @@ export class BookEditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
-      this.id = +params['id'];
       this.editMode = params['id'] != null;
+      console.log((this.editMode = params['id'] != null)); // TODO: Comment for production.
+      this.id = +params['id'];
       this.initForm();
     });
   }
@@ -39,6 +40,7 @@ export class BookEditComponent implements OnInit {
         })
       );
     } else {
+      console.log(this.bookForm.value); // TODO: Comment for production.
       this.store.dispatch(new BookActions.AddBook(this.bookForm.value));
     }
     this.onCancel();

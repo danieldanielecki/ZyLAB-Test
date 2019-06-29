@@ -9,7 +9,6 @@ const booksRoutes: Routes = [
     path: '',
     component: BooksComponent,
     children: [
-      { path: '', component: BooksComponent },
       { path: 'new', component: BookEditComponent },
       { path: ':id', component: BookDetailComponent },
       { path: ':id/edit', component: BookEditComponent }

@@ -1,8 +1,27 @@
-<div>
-  <ul>
-    <li>Author name: {{ (authorState | async).authors[id].name }}</li>
-    <li>
-      Author year of birth: {{ (authorState | async).authors[id].yearOfBirth }}
-    </li>
-  </ul>
-</div>
+<mat-card class="mat-elevation-z24">
+  <h2>Author details</h2>
+
+  <!-- Authors details. -->
+  <mat-list fxLayout="column">
+    <mat-list-item fxLayoutAlign="center center">
+      Title: {{ (authorState | async).authors[id].name }}
+    </mat-list-item>
+    <mat-list-item fxLayoutAlign="center center">
+      Year: {{ (authorState | async).authors[id].yearOfBirth }}
+    </mat-list-item>
+  </mat-list>
+
+  <!-- Buttons to manipulate authors data. -->
+  <div
+    fxLayoutAlign="space-around center"
+    fxLayout.lt-md="column"
+    fxLayoutGap.lt-md="15px"
+  >
+    <button mat-raised-button color="primary" (click)="onEditAuthor()">
+      Edit
+    </button>
+    <button mat-raised-button color="warn" (click)="onDeleteAuthor()">
+      Delete
+    </button>
+  </div>
+</mat-card>

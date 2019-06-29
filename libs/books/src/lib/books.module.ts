@@ -2,7 +2,6 @@ import { bookReducer } from './books/store/book.reducers';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { BookEditComponent } from './books/book-edit/book-edit.component';
 import { BookEffects } from './books/store/book.effects';
-import { BookItemComponent } from './books/book-list/book-item/book-item.component';
 import { BookListComponent } from './books/book-list/book-list.component';
 import { BooksComponent } from './books/books.component';
 import { BooksRoutingModule } from './books-routing.module';
@@ -16,7 +15,6 @@ import { StoreModule } from '@ngrx/store';
   declarations: [
     BookDetailComponent,
     BookEditComponent,
-    BookItemComponent,
     BookListComponent,
     BooksComponent
   ],

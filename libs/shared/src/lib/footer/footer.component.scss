@@ -5,6 +5,7 @@ footer {
   left: 0;
   position: fixed;
   right: 0;
+  z-index: 100; // Overlap table's title.
 
   p {
     color: #fafafa;

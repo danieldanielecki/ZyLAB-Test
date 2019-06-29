@@ -1,4 +1,5 @@
 import { Actions, Effect, ofType } from '@ngrx/effects';
+
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import * as AuthorActions from './author.actions';
@@ -13,9 +14,8 @@ export class AuthorEffects {
   authorFetch = this.actions$.pipe(
     ofType(AuthorActions.FETCH_AUTHORS),
     switchMap((action: AuthorActions.FetchAuthors) => {
-      // TODO: Change this URL.
       return this.httpClient.get<Author[]>(
-        'https://ng-recipe-book-1a5ac.firebaseio.com/recipes.json',
+        'https://zylab-dev.firebaseio.com/authors.json',
         {
           observe: 'body',
           responseType: 'json'
@@ -23,7 +23,7 @@ export class AuthorEffects {
       );
     }),
     map(authors => {
-      console.log(authors);
+      console.log(authors); // TODO: Comment for production.
       return {
         type: AuthorActions.SET_AUTHORS,
         payload: authors
@@ -36,10 +36,9 @@ export class AuthorEffects {
     ofType(AuthorActions.STORE_AUTHORS),
     withLatestFrom(this.store.select('authors')),
     switchMap(([action, state]) => {
-      // TODO: Change this URL.
       const req = new HttpRequest(
         'PUT',
-        'https://ng-recipe-book-1a5ac.firebaseio.com/recipes.json',
+        'https://zylab-dev.firebaseio.com/authors.json',
         state.authors,
         { reportProgress: true }
       );

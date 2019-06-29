@@ -1,6 +1,6 @@
 {
   "name": "zylab-workspace",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -1683,6 +1683,11 @@
       "version": "7.4.0",
       "resolved": "https://registry.npmjs.org/@ngrx/store/-/store-7.4.0.tgz",
       "integrity": "sha512-kwTUHgfgBeAL4RQBjZO46z9v4Xzg8PXAgY4WwXdt3zUk1tF4ZvijMleFvFRUoiJJfxF/UM6jgIZ/yGrX2dXQuA=="
+    },
+    "@ngrx/store-devtools": {
+      "version": "8.0.1",
+      "resolved": "https://registry.npmjs.org/@ngrx/store-devtools/-/store-devtools-8.0.1.tgz",
+      "integrity": "sha512-TxOksSARaQ1hCZM0/qMCun6axbSFuhSEmuW9YLRhuU5m3gvJN4cr5tk960DDVGl8/06YX6Q2CQ7uIgx5qCwbsg=="
     },
     "@ngtools/webpack": {
       "version": "7.3.9",

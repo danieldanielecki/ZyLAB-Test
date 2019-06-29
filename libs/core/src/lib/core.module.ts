@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
+// import { environment } from '@zylab-workspace/src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   exports: [BrowserModule, BrowserAnimationsModule, HttpClientModule],
@@ -12,7 +15,9 @@ import { StoreModule } from '@ngrx/store';
     BrowserAnimationsModule,
     EffectsModule.forRoot([]),
     HttpClientModule,
-    StoreModule.forRoot([])
+    StoreModule.forRoot([]),
+    StoreRouterConnectingModule //,
+    // !environment.production ? StoreDevtoolsModule.instrument() : [] // Empty array means "don't add this module".
   ]
 })
 export class CoreModule {

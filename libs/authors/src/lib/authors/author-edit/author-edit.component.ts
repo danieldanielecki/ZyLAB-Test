@@ -25,6 +25,7 @@ export class AuthorEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.editMode = params['id'] != null;
+      console.log((this.editMode = params['id'] != null)); // TODO: Comment for production.
       this.id = +params['id'];
       this.initForm();
     });
@@ -39,6 +40,7 @@ export class AuthorEditComponent implements OnInit {
         })
       );
     } else {
+      console.log(this.authorForm.value); // TODO: Comment for production.
       this.store.dispatch(new AuthorActions.AddAuthor(this.authorForm.value));
     }
     this.onCancel();
@@ -50,7 +52,7 @@ export class AuthorEditComponent implements OnInit {
 
   private initForm() {
     let authorName = '';
-    let authoryearOfBirth = 0;
+    let authorYearOfBirth = null;
 
     if (this.editMode) {
       this.store
@@ -59,13 +61,13 @@ export class AuthorEditComponent implements OnInit {
         .subscribe((authorState: fromAuthor.State) => {
           const author = authorState.authors[this.id];
           authorName = author.name;
-          authoryearOfBirth = author.yearOfBirth;
+          authorYearOfBirth = author.yearOfBirth;
         });
     }
 
     this.authorForm = new FormGroup({
       name: new FormControl(authorName, Validators.required),
-      yearOfBirth: new FormControl(authoryearOfBirth, Validators.required)
+      yearOfBirth: new FormControl(authorYearOfBirth, Validators.required)
     });
   }
 }
