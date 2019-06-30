@@ -17,6 +17,7 @@ Some things has been delivered as extra fetures, these are:
 - "**OPTIONAL** User should be able to create a new Book.".
 - Sorting/pagination of results.
 - Save/Fetch results to Firebase database.
+- State management.
 - Monorepository.
 - Pipelines.
 - Small showcase how to deal with secrets, taking an example of API keys and obviously Firebase access token to the server.
