@@ -1,5 +1,6 @@
 <mat-card class="mat-elevation-z24">
-  <h2>Edit Book</h2>
+  <h2 *ngIf="editMode">Edit Book</h2>
+  <h2 *ngIf="!editMode">Add Book</h2>
   <form
     [formGroup]="bookForm"
     (ngSubmit)="onSubmit()"
@@ -21,14 +22,22 @@
       <mat-error>Invalid title.</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input
-        matInput
-        (keypress)="allowOnlyNumbers($event)"
-        formControlName="authorId"
-        placeholder="Author ID"
-        type="text"
-      />
-      <mat-error>Invalid input</mat-error>
+      <mat-select
+        [disabled]="editMode"
+        value="{{
+          editMode
+            ? (authorState | async).authors[
+                (bookState | async).books[id].authorId
+              ].name
+            : ''
+        }}"
+      >
+        <ng-container *ngFor="let author of (authorState | async).authors">
+          <mat-option value="{{ author.name }}">
+            {{ author.name }}
+          </mat-option>
+        </ng-container>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
       <input

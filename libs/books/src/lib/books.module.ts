@@ -1,3 +1,4 @@
+import { authorReducer } from '@libs/authors/src/lib/authors/store/author.reducers';
 import { bookReducer } from './books/store/book.reducers';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { BookEditComponent } from './books/book-edit/book-edit.component';
@@ -23,6 +24,7 @@ import { StoreModule } from '@ngrx/store';
     EffectsModule.forFeature([BookEffects]),
     RouterModule.forChild([{ path: '', component: BooksComponent }]),
     SharedModule,
+    StoreModule.forFeature('authors', authorReducer),
     StoreModule.forFeature('books', bookReducer)
   ]
 })

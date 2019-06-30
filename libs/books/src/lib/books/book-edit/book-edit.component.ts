@@ -1,10 +1,12 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import * as _ from 'lodash';
 import * as BookActions from '../store/book.actions';
+import * as fromAuthor from '@libs/authors/src/lib/authors/store/author.reducers';
 import * as fromBook from '../store/book.reducers';
 
 @Component({
@@ -13,7 +15,9 @@ import * as fromBook from '../store/book.reducers';
   styleUrls: ['./book-edit.component.scss']
 })
 export class BookEditComponent implements AfterViewInit, OnInit {
+  public authorState: Observable<fromAuthor.State>;
   public bookForm: FormGroup;
+  public bookState: Observable<fromBook.State>;
   public editMode = false;
   public hasChanged = false;
   public id: number;
@@ -22,21 +26,22 @@ export class BookEditComponent implements AfterViewInit, OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromBook.FeatureState>
+    private storeAuthors: Store<fromAuthor.FeatureState>,
+    private storeBooks: Store<fromBook.FeatureState>
   ) {}
 
   ngAfterViewInit() {
     // Get changed values of form.
     this.bookForm.valueChanges.subscribe(changes => {
-      // Parse JSON only if year & author ID aren't empty.
-      if (changes.year !== '' && changes.authorId !== '') {
+      // Parse JSON only if year isn't empty.
+      if (changes.year !== '') {
         const dataChanges = [
           JSON.parse(changes.year),
           JSON.parse(JSON.stringify(changes.title)),
-          JSON.parse(changes.authorId),
           JSON.parse(JSON.stringify(changes.publisher))
         ];
 
+        console.log(dataChanges);
         if (
           _.isEqual(
             dataChanges,
@@ -53,6 +58,8 @@ export class BookEditComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
+      this.authorState = this.storeAuthors.select('authors');
+      this.bookState = this.storeBooks.select('books');
       this.editMode = params['id'] != null;
       this.id = +params['id'];
       this.initialFormData = this.initForm();
@@ -70,15 +77,14 @@ export class BookEditComponent implements AfterViewInit, OnInit {
 
   public onSubmit(): void {
     if (this.editMode) {
-      this.store.dispatch(
+      this.storeBooks.dispatch(
         new BookActions.UpdateBook({
           index: this.id,
           updatedBook: this.bookForm.value
         })
       );
     } else {
-      console.log(this.bookForm.value); // TODO: Comment for production.
-      this.store.dispatch(new BookActions.AddBook(this.bookForm.value));
+      this.storeBooks.dispatch(new BookActions.AddBook(this.bookForm.value));
     }
     this.onCancel();
   }
@@ -90,18 +96,16 @@ export class BookEditComponent implements AfterViewInit, OnInit {
   private initForm(): {} {
     let bookYear = null;
     let bookTitle = '';
-    let bookauthorId = null;
     let bookPublisher = '';
 
     if (this.editMode) {
-      this.store
+      this.storeBooks
         .select('books')
         .pipe(take(1))
         .subscribe((bookState: fromBook.State) => {
           const book = bookState.books[this.id];
           bookYear = book.year;
           bookTitle = book.title;
-          bookauthorId = book.authorId;
           bookPublisher = book.publisher;
         });
     }
@@ -116,13 +120,12 @@ export class BookEditComponent implements AfterViewInit, OnInit {
         Validators.maxLength(140),
         Validators.required
       ]),
-      authorId: new FormControl(bookauthorId, Validators.required),
       publisher: new FormControl(bookPublisher, [
         Validators.maxLength(140),
         Validators.required
       ])
     });
 
-    return [bookYear, bookTitle, bookauthorId, bookPublisher];
+    return [bookYear, bookTitle, bookPublisher];
   }
 }

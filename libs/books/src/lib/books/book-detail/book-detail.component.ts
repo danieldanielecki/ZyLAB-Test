@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as BookActions from '../store/book.actions';
+import * as fromAuthor from '@libs/authors/src/lib/authors/store/author.reducers';
 import * as fromBook from '../store/book.reducers';
 
 @Component({
@@ -11,19 +12,22 @@ import * as fromBook from '../store/book.reducers';
   styleUrls: ['./book-detail.component.scss']
 })
 export class BookDetailComponent implements OnInit {
-  bookState: Observable<fromBook.State>;
-  id: number;
+  public authorState: Observable<fromAuthor.State>;
+  public bookState: Observable<fromBook.State>;
+  public id: number;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromBook.FeatureState>
+    private storeAuthors: Store<fromAuthor.FeatureState>,
+    private storeBooks: Store<fromBook.FeatureState>
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
-      this.bookState = this.store.select('books');
+      this.authorState = this.storeAuthors.select('authors');
+      this.bookState = this.storeBooks.select('books');
     });
   }
 
@@ -32,7 +36,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   onDeleteBook() {
-    this.store.dispatch(new BookActions.DeleteBook(this.id));
+    this.storeBooks.dispatch(new BookActions.DeleteBook(this.id));
     this.router.navigate(['/books']);
   }
 }
