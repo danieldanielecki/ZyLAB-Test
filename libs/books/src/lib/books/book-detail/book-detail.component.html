@@ -10,7 +10,11 @@
       Year: {{ (bookState | async).books[id].year }}
     </mat-list-item>
     <mat-list-item fxLayoutAlign="center center">
-      Author: {{ (bookState | async).books[id].authorId }}
+      Author:
+      {{
+        (authorState | async).authors[(bookState | async).books[id].authorId]
+          .name
+      }}
     </mat-list-item>
     <mat-list-item fxLayoutAlign="center center">
       Publisher: {{ (bookState | async).books[id].publisher }}
