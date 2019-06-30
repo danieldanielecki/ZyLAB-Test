@@ -5,6 +5,7 @@ import { AuthorEffects } from './authors/store/author.effects';
 import { AuthorListComponent } from './authors/author-list/author-list.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AuthorsRoutingModule } from './authors-routing.module';
+import { bookReducer } from '@libs/books/src/lib/books/store/book.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -23,7 +24,8 @@ import { StoreModule } from '@ngrx/store';
     EffectsModule.forFeature([AuthorEffects]),
     RouterModule.forChild([{ path: '', component: AuthorsComponent }]),
     SharedModule,
-    StoreModule.forFeature('authors', authorReducer)
+    StoreModule.forFeature('authors', authorReducer),
+    StoreModule.forFeature('books', bookReducer)
   ]
 })
 export class AuthorsModule {}

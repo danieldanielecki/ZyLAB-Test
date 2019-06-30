@@ -23,7 +23,6 @@ export class AuthorEffects {
       );
     }),
     map(authors => {
-      console.log(authors); // TODO: Comment for production.
       return {
         type: AuthorActions.SET_AUTHORS,
         payload: authors

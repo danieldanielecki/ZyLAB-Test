@@ -47,7 +47,6 @@ export class AuthorListComponent implements AfterViewInit, OnInit {
         }),
         // Handle errors. There's not actually call to API, thus it's just as a practice. Different types of errors (mapping/throwing) in such scenario could be added as well as finalize/tap.
         catchError((error: any) => {
-          console.log('Caught mapping error: ', error); // TODO: Comment for production.
           return throwError(error); // Throw an error.
         })
       )

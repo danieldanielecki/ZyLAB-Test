@@ -11,7 +11,23 @@
     </mat-list-item>
   </mat-list>
 
-  <!-- Buttons to manipulate authors data. -->
+  <!-- TODO: Fix it, not working as expected. -->
+  <h3 *ngIf="(bookState | async).books[id].authorId - 1 >= id">
+    Author's books
+  </h3>
+  <ng-container *ngFor="let book of (bookState | async).books; let i = index">
+    <ng-container *ngIf="(bookState | async).books[id].authorId - 1 >= id">
+      <p
+        *ngIf="
+          (bookState | async).books[i].authorId - 1 ===
+          (bookState | async).books[id].authorId - 1
+        "
+      >
+        {{ (bookState | async).books[i].title }}
+      </p>
+    </ng-container>
+  </ng-container>
+
   <div fxLayout="column" fxLayoutGap="20px">
     <button mat-raised-button color="primary" (click)="onEditAuthor()">
       Edit
