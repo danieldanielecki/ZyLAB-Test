@@ -1,37 +1,61 @@
-<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-  <button type="submit" [disabled]="!bookForm.valid">Save</button>
-  <button type="button" class="btn btn-danger" (click)="onCancel()">
-    Cancel
-  </button>
-  <div class="form-group">
-    <label for="year">Year</label>
-    <input type="text" id="year" formControlName="year" class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input
-      type="text"
-      id="title"
-      formControlName="title"
-      class="form-control"
-    />
-  </div>
-  <div class="form-group">
-    <label for="authorId">Author ID</label>
-    <input
-      type="text"
-      id="authorId"
-      formControlName="authorId"
-      class="form-control"
-    />
-  </div>
-  <div class="form-group">
-    <label for="publisher">Publisher</label>
-    <input
-      type="text"
-      id="publisher"
-      formControlName="publisher"
-      class="form-control"
-    />
-  </div>
-</form>
+<mat-card class="mat-elevation-z24">
+  <h2>Edit Book</h2>
+  <form
+    [formGroup]="bookForm"
+    (ngSubmit)="onSubmit()"
+    fxLayout="column"
+    fxLayoutGap="20px"
+  >
+    <mat-form-field>
+      <input
+        matInput
+        (keypress)="allowOnlyNumbers($event)"
+        formControlName="year"
+        placeholder="Year of Publishing"
+        type="text"
+      />
+      <mat-error>Invalid year of publishing.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="title" placeholder="Title" type="text" />
+      <mat-error>Invalid title.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        (keypress)="allowOnlyNumbers($event)"
+        formControlName="authorId"
+        placeholder="Author ID"
+        type="text"
+      />
+      <mat-error>Invalid input</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        formControlName="publisher"
+        placeholder="Publisher"
+        type="text"
+      />
+      <mat-error>Invalid publisher.</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      [disabled]="!bookForm.valid || !hasChanged"
+      color="primary"
+      type="submit"
+    >
+      Save
+    </button>
+    <button
+      mat-raised-button
+      [disabled]="!bookForm.valid || !hasChanged"
+      (click)="onCancel()"
+      color="warn"
+      class="btn btn-danger"
+      type="button"
+    >
+      Cancel
+    </button>
+  </form>
+</mat-card>

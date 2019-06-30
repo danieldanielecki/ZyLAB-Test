@@ -1,8 +1,9 @@
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
+import * as _ from 'lodash';
 import * as BookActions from '../store/book.actions';
 import * as fromBook from '../store/book.reducers';
 
@@ -11,10 +12,12 @@ import * as fromBook from '../store/book.reducers';
   templateUrl: './book-edit.component.html',
   styleUrls: ['./book-edit.component.scss']
 })
-export class BookEditComponent implements OnInit {
-  bookForm: FormGroup;
-  editMode = false;
-  id: number;
+export class BookEditComponent implements AfterViewInit, OnInit {
+  public bookForm: FormGroup;
+  public editMode = false;
+  public hasChanged = false;
+  public id: number;
+  public initialFormData;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,16 +25,50 @@ export class BookEditComponent implements OnInit {
     private store: Store<fromBook.FeatureState>
   ) {}
 
-  ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.editMode = params['id'] != null;
-      console.log((this.editMode = params['id'] != null)); // TODO: Comment for production.
-      this.id = +params['id'];
-      this.initForm();
+  ngAfterViewInit() {
+    // Get changed values of form.
+    this.bookForm.valueChanges.subscribe(changes => {
+      // Parse JSON only if year & author ID aren't empty.
+      if (changes.year !== '' && changes.authorId !== '') {
+        const dataChanges = [
+          JSON.parse(changes.year),
+          JSON.parse(JSON.stringify(changes.title)),
+          JSON.parse(changes.authorId),
+          JSON.parse(JSON.stringify(changes.publisher))
+        ];
+
+        if (
+          _.isEqual(
+            dataChanges,
+            JSON.parse(JSON.stringify(this.initialFormData))
+          )
+        ) {
+          this.hasChanged = false;
+        } else {
+          this.hasChanged = true;
+        }
+      }
     });
   }
 
-  onSubmit() {
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.editMode = params['id'] != null;
+      this.id = +params['id'];
+      this.initialFormData = this.initForm();
+    });
+  }
+
+  // Allow only numbers.
+  public allowOnlyNumbers(event): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+
+  public onSubmit(): void {
     if (this.editMode) {
       this.store.dispatch(
         new BookActions.UpdateBook({
@@ -46,14 +83,14 @@ export class BookEditComponent implements OnInit {
     this.onCancel();
   }
 
-  onCancel() {
+  public onCancel(): void {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
 
-  private initForm() {
-    let bookYear = 0;
+  private initForm(): {} {
+    let bookYear = null;
     let bookTitle = '';
-    let bookauthorId = 0;
+    let bookauthorId = null;
     let bookPublisher = '';
 
     if (this.editMode) {
@@ -70,10 +107,22 @@ export class BookEditComponent implements OnInit {
     }
 
     this.bookForm = new FormGroup({
-      year: new FormControl(bookYear, Validators.required),
-      title: new FormControl(bookTitle, Validators.required),
+      year: new FormControl(bookYear, [
+        Validators.maxLength(4),
+        Validators.pattern('^[0-9]*$'),
+        Validators.required
+      ]),
+      title: new FormControl(bookTitle, [
+        Validators.maxLength(140),
+        Validators.required
+      ]),
       authorId: new FormControl(bookauthorId, Validators.required),
-      publisher: new FormControl(bookPublisher, Validators.required)
+      publisher: new FormControl(bookPublisher, [
+        Validators.maxLength(140),
+        Validators.required
+      ])
     });
+
+    return [bookYear, bookTitle, bookauthorId, bookPublisher];
   }
 }
