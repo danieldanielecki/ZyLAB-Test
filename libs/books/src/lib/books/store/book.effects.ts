@@ -22,7 +22,6 @@ export class BookEffects {
       );
     }),
     map(books => {
-      console.log(books); // TODO: Comment for production.
       return {
         type: BookActions.SET_BOOKS,
         payload: books

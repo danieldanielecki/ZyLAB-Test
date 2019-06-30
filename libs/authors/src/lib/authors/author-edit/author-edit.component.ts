@@ -70,7 +70,6 @@ export class AuthorEditComponent implements AfterViewInit, OnInit {
         })
       );
     } else {
-      console.log(this.authorForm.value); // TODO: Comment for production.
       this.store.dispatch(new AuthorActions.AddAuthor(this.authorForm.value));
     }
     this.onCancel();

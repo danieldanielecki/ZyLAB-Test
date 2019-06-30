@@ -41,7 +41,6 @@ export class BookEditComponent implements AfterViewInit, OnInit {
           JSON.parse(JSON.stringify(changes.publisher))
         ];
 
-        console.log(dataChanges);
         if (
           _.isEqual(
             dataChanges,
