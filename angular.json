@@ -34,7 +34,7 @@
               "node_modules/normalize.css/normalize.css",
               "apps/zylab-workspace/src/styles.scss"
             ],
-            "scripts": ["node_modules/hammerjs/hammer.min.js"],
+            "scripts": ["node_modules/hammerjs/hammer.js"],
             "es5BrowserSupport": true
           },
           "configurations": {
