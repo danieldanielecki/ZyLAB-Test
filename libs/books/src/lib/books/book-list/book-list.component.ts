@@ -30,12 +30,12 @@ export class BookListComponent implements AfterViewInit, OnInit {
     private store: Store<fromBook.FeatureState>
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit() {
     this.bookState = this.store.select('books');
   }
 
   // Once the view will be initialized load the data.
-  public ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.bookState
       .pipe(
         map((response: any) => {

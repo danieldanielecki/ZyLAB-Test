@@ -1,19 +1,42 @@
-<form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
-  <button type="submit" [disabled]="!authorForm.valid">Save</button>
-  <button type="button" class="btn btn-danger" (click)="onCancel()">
-    Cancel
-  </button>
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" id="name" formControlName="name" class="form-control" />
-  </div>
-  <div class="form-group">
-    <label for="yearOfBirth">Year of Birth</label>
-    <input
-      type="text"
-      id="yearOfBirth"
-      formControlName="yearOfBirth"
-      class="form-control"
-    />
-  </div>
-</form>
+<mat-card class="mat-elevation-z24">
+  <h2>Edit Author</h2>
+  <form
+    [formGroup]="authorForm"
+    (ngSubmit)="onSubmit()"
+    fxLayout="column"
+    fxLayoutGap="20px"
+  >
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name" type="text" />
+      <mat-error>Invalid name.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        (keypress)="allowOnlyNumbers($event)"
+        formControlName="yearOfBirth"
+        placeholder="Year of birth"
+        type="text"
+      />
+      <mat-error>Invalid year of birth.</mat-error>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      [disabled]="!authorForm.valid || !hasChanged"
+      color="primary"
+      type="submit"
+    >
+      Save
+    </button>
+    <button
+      mat-raised-button
+      [disabled]="!authorForm.valid || !hasChanged"
+      (click)="onCancel()"
+      class="btn btn-danger"
+      color="warn"
+      type="button"
+    >
+      Cancel
+    </button>
+  </form>
+</mat-card>

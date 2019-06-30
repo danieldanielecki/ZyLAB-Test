@@ -53,6 +53,7 @@
     "@nrwl/nx": "^7.8.6",
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
+    "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "ngx-moment": "^3.4.0",
     "normalize.css": "^8.0.1",
@@ -60,7 +61,6 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "jest-preset-angular": "^7.1.1",
     "@angular-builders/custom-webpack": "^7.4.3",
     "@angular-builders/dev-server": "^7.3.1",
     "@angular-devkit/build-angular": "~0.13.0",
@@ -72,6 +72,7 @@
     "@nrwl/schematics": "^7.8.6",
     "@schematics/angular": "^7.3.1",
     "@types/jest": "^24.0.15",
+    "@types/lodash": "^4.14.135",
     "@types/node": "~8.9.4",
     "audit-ci": "^2.0.1",
     "codelyzer": "~5.0.1",
@@ -79,6 +80,7 @@
     "dotenv": "6.2.0",
     "firebase-tools": "^7.0.1",
     "jest": "24.1.0",
+    "jest-preset-angular": "^7.1.1",
     "prettier": "1.16.4",
     "ts-jest": "24.0.0",
     "ts-node": "~7.0.0",
