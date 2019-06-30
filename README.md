@@ -1,6 +1,6 @@
 # ZyLAB test
 
-This project is a test for ZyLAB front end case with description in a file [DESCRIPTION.md].
+This project is a test for ZyLAB front end case with description in a file [https://gitlab.com/danieldanielecki/zylab-test/blob/master/DESCRIPTION.md](DESCRIPTION.md).
 
 ## Missing
 
@@ -14,7 +14,7 @@ The following elements are missing or partially working:
 
 Some things has been delivered as extra fetures, these are:
 
-- "[OPTIONAL] User should be able to create a new Book.".
+- "**OPTIONAL** User should be able to create a new Book.".
 - Sorting/pagination of results.
 - Save/Fetch results to Firebase database.
 - Monorepository.
@@ -23,4 +23,4 @@ Some things has been delivered as extra fetures, these are:
 
 ## Deployment
 
-Production environment [https://zylab-prod.web.app/], as well as development [https://zylab-dev.web.app/]. Currently they are the same.
+Production environment [https://zylab-prod.web.app/](https://zylab-dev.web.app/), as well as development [https://zylab-dev.web.app/](https://zylab-dev.web.app/). Currently they are the same.
