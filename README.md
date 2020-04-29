@@ -25,3 +25,10 @@ Some things has been delivered as extra fetures, these are:
 ## Deployment
 
 Production environment [https://zylab-prod.web.app/](https://zylab-dev.web.app/), as well as development [https://zylab-dev.web.app/](https://zylab-dev.web.app/). Currently they are the same.
+
+## Feedback (a bit questioned...)
+
+1. Code is not structured properly
+2. A lot of bugs
+3. Application is breaking
+4. Disregarded instructions of assignment
